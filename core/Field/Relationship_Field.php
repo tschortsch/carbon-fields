@@ -209,7 +209,11 @@ class Relationship_Field extends Field {
 					} #>
 					<span class="selected-counter">{{{ selected_items_length }}}</span> 
 					<span class="selected-label" data-single-label="<?php _e( 'selected item', 'carbon_fields' ); ?>" data-plural-label="<?php _e( 'selected items', 'carbon_fields' ); ?>">
-						<?php _e( 'selected items', 'carbon_fields' ); ?>
+						<# if ( selected_items_length == 1 ) { #>
+							<?php _e( 'selected item', 'carbon_fields' ); ?>
+						<# } else { #>
+							<?php _e( 'selected items', 'carbon_fields' ); ?>
+						<# } #>
 					</span>
 
 					<?php
