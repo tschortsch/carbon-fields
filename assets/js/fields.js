@@ -1979,6 +1979,7 @@ window.carbon = window.carbon || {};
 			this.listenTo(this.fieldsCollection, 'add', this.updateFieldNameID);
 			this.listenTo(this.fieldsCollection, 'add', this.renderField);
 			this.listenTo(this.fieldsCollection, 'change', this.sync);
+			this.listenTo(this.fieldsCollection, 'change', this.setTitle);
 
 			// Listen for fields that want to multiply and create new groups with them
 			this.listenTo(this.fieldsCollection, 'change:multiply', this.multiplier);
@@ -2035,6 +2036,14 @@ window.carbon = window.carbon || {};
 
 		sync: function() {
 			this.model.set('fields', this.fieldsCollection.toJSON());
+		},
+
+		setTitle: function() {
+			var title = '';
+			for(var i = 0; i < this.fieldsCollection.models.length; i++) {
+				title += this.fieldsCollection.models[i].attributes.value + ' ';
+			}
+			this.$('> .carbon-drag-handle .group-name').text(title);
 		},
 
 		updateFieldNameID: function(model) {
